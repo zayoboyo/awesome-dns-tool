@@ -58,7 +58,7 @@ class DNSRecordController
         // Retrieve a single DNS record from WebSupport REST API by ID
         $response = $this->dnsService->get($_GET['id'])->send();
 
-        // Instantiate a new DNS class so we can get the bindings
+        // Instantiate a new DNS class of given type, so we can get the bindings
         $dnsRecord = DNSRecord::instantiate($response['type']);
 
 
