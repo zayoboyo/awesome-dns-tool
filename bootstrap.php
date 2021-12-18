@@ -1,11 +1,6 @@
 <?php
 /** All things related to bootstraping the actual 'framework', if we can call it that way. */
 
-function app_path(string $path) : string
-{
-    return __DIR__ . "/" . $path;
-}
-
 function has_message(string $key) : bool
 {
     if(isset($_SESSION[$key]))

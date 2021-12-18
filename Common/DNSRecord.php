@@ -28,7 +28,7 @@ abstract class DNSRecord
      */
     final public static function instantiate(string $dnsType) : DNSRecord
     {
-        $dnsRecord = 'Domain\Dns\Models\\' . $dnsType;
+        $dnsRecord = 'Domain\DNS\Models\\' . $dnsType;
 
         return new $dnsRecord;
     }
