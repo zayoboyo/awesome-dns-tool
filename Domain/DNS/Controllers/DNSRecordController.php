@@ -74,11 +74,14 @@ class DNSRecordController
     public function store()
     {
         $type = $_GET['type'];
-        $dnsRecord = 'Domain\Dns\Models\\' . $type;
-        $dnsRecord = new $dnsRecord;
 
+        // Instantiate a new DNS class of given type, so we can get the bindings
+        $dnsRecord = DNSRecord::instantiate($type);
+
+        // Include the store form view
         include(app_path('Domain/DNS/Views/store.php'));
 
+        // Unset all unnecessary messages and errors
         unset($_SESSION['errors']);
         unset($_SESSION['message']);
     }
