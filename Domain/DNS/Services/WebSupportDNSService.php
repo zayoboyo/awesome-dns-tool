@@ -14,9 +14,23 @@ class WebSupportDNSService
 
     private $data = "";
 
-    private $apikey = "e55d4ef0-6b5f-4990-9372-baf7bcaa6db3";
-    private $secret = "56c53a079f28c109df2f23301257de04a0a80cc8";
+    private $apikey;
+    private $secret;
+    private $domain;
 
+    function __construct()
+    {
+        $this->apikey = Config::get('apiKey');
+        $this->secret = Config::get('secret');
+        $this->domain = Config::get('domain');
+    }
+
+    /**
+     * Sets DNS record data to be used in the request.
+     *
+     * @param $data
+     * @return $this
+     */
     public function setData($data)
     {
         $this->data = $data;
@@ -45,36 +59,58 @@ class WebSupportDNSService
      */
     public function getAll()
     {
-        $this->path = sprintf('%s%s%s','/v1/user/self/zone/', Config::get('domain'), '/record');
+        $this->path = sprintf('%s%s%s','/v1/user/self/zone/', $this->domain, '/record');
         $this->method = 'GET';
 
         return $this;
     }
 
+    /**
+     * Creates new DNS record.
+     *
+     * @return $this
+     */
     public function create()
     {
-        $this->path = sprintf('%s%s%s', '/v1/user/self/zone/', Config::get('domain'), '/record');
+        $this->path = sprintf('%s%s%s', '/v1/user/self/zone/', $this->domain, '/record');
         $this->method = 'POST';
 
         return $this;
     }
 
+    /**
+     * Updates DNS record by ID.
+     *
+     * @param $id
+     * @return $this
+     */
     public function update($id)
     {
-        $this->path = sprintf('%s%s%s%s', '/v1/user/self/zone/', Config::get('domain'), '/record/', $id);
+        $this->path = sprintf('%s%s%s%s', '/v1/user/self/zone/', $this->domain, '/record/', $id);
         $this->method = 'PUT';
 
         return $this;
     }
 
+    /**
+     * Deletes DNS record by ID.
+     *
+     * @param $id
+     * @return $this
+     */
     public function delete($id)
     {
-        $this->path = sprintf('%s%s%s%s', '/v1/user/self/zone/', Config::get('domain'),  '/record/', $id);
+        $this->path = sprintf('%s%s%s%s', '/v1/user/self/zone/', $this->domain,  '/record/', $id);
         $this->method = 'DELETE';
 
         return $this;
     }
 
+    /**
+     * Sends the built query to the WebSupport DNS API endpoint.
+     *
+     * @return mixed
+     */
     public function send()
     {
         $time = time();
@@ -93,9 +129,9 @@ class WebSupportDNSService
         curl_setopt($ch, CURLOPT_URL, $endpoint);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->method);
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($ch, CURLOPT_USERPWD, Config::get('apiKey').':'.$signature);
+        curl_setopt($ch, CURLOPT_USERPWD, $this->apikey.':'.$signature);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->data));
 
         $response = curl_exec($ch);
