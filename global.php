@@ -1,5 +1,5 @@
 <?php
-/** All things related to bootstraping the actual 'framework', if we can call it that way. */
+/** Global functions that are likely to be used across the 'framework', if we can call it that way :) */
 
 function has_message(string $key) : bool
 {
