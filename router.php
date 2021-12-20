@@ -1,9 +1,6 @@
 <?php
 /**
- * @author Peter Zajicek
- *
  * The most basic router that the world has ever seen.
- *
  */
 
 // Request method (GET, POST)

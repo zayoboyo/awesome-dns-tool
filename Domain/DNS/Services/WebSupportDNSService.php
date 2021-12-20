@@ -4,9 +4,6 @@ namespace Domain\DNS\Services;
 use Common\Config;
 use Common\DNSRecord;
 
-/**
- * WebSupport DNS value changing service.
- */
 class WebSupportDNSService
 {
     private $path = "";

@@ -1,8 +1,7 @@
 <?php
 /**
  * @author Peter Zajicek
- * Awesome DNS tool for editing DNS records via WebSupport REST API.
- * Developed a small framework around it, so the code is more-less organized.
+ * Awesome DNS tool for editing DNS records via WebSupport REST API, with small 'framework' built around it.
  */
 
 /**
@@ -19,7 +18,7 @@ function app_path($path = null)
 session_start();
 
 // Bootstrap the actual 'framework'
-require_once app_path() . "/bootstrap.php";
+require_once app_path() . "/global.php";
 
 spl_autoload_register('autoloader');
 
