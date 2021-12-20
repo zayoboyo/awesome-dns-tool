@@ -17,11 +17,10 @@ function app_path($path = null)
 
 session_start();
 
-// Bootstrap the actual 'framework'
+// Global functions that are used throughout the application
 require_once app_path() . "/global.php";
 
 spl_autoload_register('autoloader');
-
 
 function autoloader($class)
 {
