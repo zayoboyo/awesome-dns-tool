@@ -13,7 +13,7 @@
                 <thead>
                 <tr>
                     <?php foreach ($dnsRecord->bindings() as $key => $value) { ?>
-                        <th><?php echo $value; ?></th>
+                        <th class="<?php if($key == 'type') echo 'is-hidden'; ?>"><?php echo $value; ?></th>
                     <?php } ?>
                     <th>Action</th>
 
@@ -23,7 +23,7 @@
                 <?php for($i = 0; $i < count($filtered); $i++) { ?>
                 <tr>
                     <?php foreach($dnsRecord->bindings() as $key => $value) { ?>
-                    <td><?php echo $filtered[$i][$key]; ?></td>
+                    <td class="<?php if($key == 'type') echo 'is-hidden'; ?>"><?php echo $filtered[$i][$key]; ?></td>
                     <?php } ?>
                     <td>
                         <div class="field is-grouped">
